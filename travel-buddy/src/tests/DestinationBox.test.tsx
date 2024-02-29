@@ -4,7 +4,7 @@ import DestinationBox from '../components/DestinationBox';
 
 describe(DestinationBox, () => {
     it("renders without error when all props are valid", () => {
-        const { container } = render(<DestinationBox country='Country' city='City' rating='5' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png'/>);        
+        const { container } = render(<DestinationBox country='Country' city='City' rating='5' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png' isLoggedIn={true}/>);        
         
         expect(container.querySelector('.box')).toBeInTheDocument();
 

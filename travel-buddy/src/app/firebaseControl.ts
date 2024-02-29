@@ -11,14 +11,13 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCj5CanDTH_T1opQ1OegZ1bypZUFIGxOfQ",
-  authDomain: "test-5c378.firebaseapp.com",
-  databaseURL: "https://test-5c378-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "test-5c378",
-  storageBucket: "test-5c378.appspot.com",
-  messagingSenderId: "453126250081",
-  appId: "1:453126250081:web:3a3ba8b1ee5477b2271420",
-  measurementId: "G-3V8H39KJPL"
+  apiKey: "AIzaSyBWui1W0CBRAzvrMqHCOBUc3hMkmo3KkXw",
+  authDomain: "tdt4140-prosjekt.firebaseapp.com",
+  databaseURL: "https://tdt4140-prosjekt-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "tdt4140-prosjekt",
+  storageBucket: "tdt4140-prosjekt.appspot.com",
+  messagingSenderId: "807771308285",
+  appId: "1:807771308285:web:43ebb655b020317c987e94"
 };
 
 // Initialize Firebase
@@ -40,25 +39,55 @@ export const auth = getAuth(app)
   async getDestinastions(){
     const destinationsCol = collection(db, "destinations");
     const destinationsSnapshot = await getDocs(destinationsCol);
-    const destinationsList = destinationsSnapshot.docs.map(doc => doc.data());
+    const destinationsList = destinationsSnapshot.docs.map(doc =>  ({
+      id: doc.id,
+      ...doc.data()
+    }));
     return destinationsList;
+  }
+
+  async getReviewsForDestination(destinationID: string) {
+    const reviewsCol = collection(db, "destinations", destinationID, "reviews");
+    const reviewsSnapshot = await getDocs(reviewsCol);
+    const reviewList = reviewsSnapshot.docs.map(reviewDoc => ({
+        reviewID: reviewDoc.id,
+        ...reviewDoc.data()
+    }));
+    return reviewList;
   }
 
   async addDestination(addCity: string, addCountry: string, addImgURL?: string, addCategory?: string[], addDescription?: string) {
     const docRef = collection(db, "destinations");
     try {
-      await addDoc(docRef, {
+      const newDocRef = await addDoc(docRef, {
         city: addCity,
         country: addCountry,
         imgUrl: addImgURL,
         category: addCategory,
         description: addDescription || ""
       });
+
+      const newReviewsCol = collection(newDocRef, "reviews");
+      await addDoc(newReviewsCol, {});
     }
     catch (e) {
       console.error(e)
     }
   }
+
+  async addReview(destinationID: string, rating: number, userID: string) {
+    const docRef = collection(db, "destinations", destinationID, "reviews");
+    try {
+        const newDocRef = await addDoc(docRef, {
+          rating: rating,
+          userID: userID
+        });
+      }
+      catch (e) {
+        console.error(e)
+      }
+  }
+
   getAuthInstance() {
     return auth;
   }

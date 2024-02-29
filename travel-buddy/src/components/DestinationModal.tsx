@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/DestinationModal.css';
+import firebaseControl from '../app/firebaseControl';
+import { DocumentData } from 'firebase/firestore';
 
 interface DestinationInterface {
+    id: string;
     country: string;
     city: string;
     rating: string;
@@ -12,7 +15,15 @@ interface DestinationInterface {
 }
 
 // Note: The button must be alignes with the rating-stars when they are added
-const DestinationModal: React.FC<DestinationInterface> = ({country, city, rating, tags, description, imgURL, onClose}) => {
+const DestinationModal: React.FC<DestinationInterface> = ({id, country, city, rating, tags, description, imgURL, onClose}) => {
+    const [reviewList, setReviewList] = useState<DocumentData[]>([]);
+
+    useEffect(() => {
+        const firebasecontroller = new firebaseControl();
+        firebasecontroller.getReviewsForDestination(id).then((reviews) => {
+            setReviewList(JSON.parse(JSON.stringify(reviews)));
+        });
+    }, []);
 
     return (
         <div id='modal-container' className='not-blur'>
