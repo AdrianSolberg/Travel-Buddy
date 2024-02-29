@@ -1,6 +1,6 @@
 // FilterMenu.tsx
 import React, { useState } from 'react';
-import '../styles/FilterMenu.css';
+
 
 interface FilterProps {
     categoryTypes: { [key: string]: string[] }; // Object containing category types as keys and corresponding categories as values
