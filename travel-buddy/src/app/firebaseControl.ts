@@ -56,6 +56,10 @@ export const auth = getAuth(app)
     return reviewList;
   }
 
+  async getVisitedDestinationsForUser(userID: string) {
+    const userCol = collection(db, "user_destinations", userID)
+  }
+
   async addDestination(addCity: string, addCountry: string, addImgURL?: string, addCategory?: string[], addDescription?: string) {
     const docRef = collection(db, "destinations");
     try {
