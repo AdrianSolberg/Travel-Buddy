@@ -106,7 +106,6 @@ const HomePage = () => {
         })
     }
 
-    
 
     const filteredDestinationsSearch = (destinations: DocumentData[], searchQuery: string): DocumentData[] => {
         return destinations.filter(destin => {
@@ -122,6 +121,20 @@ const HomePage = () => {
             return cityName.includes(searchQueryLowerCase) || countryName.includes(searchQueryLowerCase) || category.some(c => c.includes(searchQueryLowerCase));
         });
 }
+
+    /**
+     * Validation method to check if there already exists a destination of the provided city and country
+     * @param destinations The list of destinations that already exists
+     * @param country  The country of the destination to be created
+     * @param city The city of the destination to be created
+     * @returns true if destination exists, false otherwise
+     */
+    const isDestinationDuplicate = (destinations: DocumentData[], country: string, city: string): boolean => {
+        const destinationsOfCity = filteredDestinationsSearch(destinations, country)
+        const destinationsOfCountry = filteredDestinationsSearch(destinations, city)
+
+        return (destinationsOfCity.length > 0 && destinationsOfCountry.length > 0) ? true: false
+    }
     
 
     const cities = () => {

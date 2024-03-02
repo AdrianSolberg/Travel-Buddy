@@ -10,12 +10,14 @@ import { DocumentData } from 'firebase/firestore';
 //     city: string;
 //     category: string[];
 // }
-/**
- * Helper function to check whether the input parameter is empty
- * @param val Value to check
- * @returns true if val is null, false otherwise
- */
-function isEmpty(val: string | any[] | null | undefined){
+
+
+ /**
+     * Helper function to check whether the input parameter is empty
+     * @param val Value to check
+     * @returns true if val is null, false otherwise
+     */
+ function isEmpty(val: string | any[] | null | undefined){
     return (val === undefined || val == null || val.length <= 0) ? true : false;
 }
 /**
@@ -38,6 +40,22 @@ const filterDestinationsByType = (destinations: DocumentData[], tags ?: string[]
     })
 }
 
-export default filterDestinationsByType;
+
+const filteredDestinationsSearch = (destinations: DocumentData[], searchQuery: string): DocumentData[] => {
+    return destinations.filter(destin => {
+        const searchQueryLowerCase = searchQuery.toLowerCase();
+        const cityName = destin.city.toLowerCase();
+        const countryName = destin.country.toLowerCase();
+        const category = Array.isArray(destin.category) ? destin.category.map(c => c.toLowerCase()) : [];
+        // If searchQuery is empty, return true for all destinations
+        if (!searchQueryLowerCase) {
+            return true;
+        }
+        // If searchQuery is not empty, only return true for destinations that include the searchQuery in their category
+        return cityName.includes(searchQueryLowerCase) || countryName.includes(searchQueryLowerCase) || category.some(c => c.includes(searchQueryLowerCase));
+    });
+}
+
+export default { filteredDestinationsSearch, filterDestinationsByType };
 
 

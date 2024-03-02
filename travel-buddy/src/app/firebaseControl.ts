@@ -6,6 +6,9 @@ import {
   addDoc,
   doc
 } from "firebase/firestore"
+import filterDestinationsByType from "../components/FilterDestinations";
+import filteredDestinationsSearch from "../components/FilterDestinations";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
