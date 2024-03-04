@@ -6,6 +6,7 @@ import {
   addDoc,
   doc
 } from "firebase/firestore"
+import { DocumentData } from 'firebase/firestore'; // tar inn dette for å sjekke om det fikser assigning DocumentData[] til inputattributt
 // import filterDestinationsByType from "../components/FilterDestinations";
 // import filteredDestinationsSearch from "../components/FilterDestinations";
 
@@ -50,20 +51,20 @@ export const auth = getAuth(app)
   }
 
   // Method to retrieve the destinationIDs that matches userID from the user_destinations collection
-  async getVisitedDestinationsForUserID(userID: string): Promise<string[]> {
-    try {
+  async getVisitedDestinationsForUserID(userID: string) {
       const user_destinationsCol = collection(db, "user_destinations");
       const user_destinationsSnapshot = await getDocs(user_destinationsCol);
+      // const userDestinationsList = user_destinationsSnapshot.docs.map(doc =>  ({
+      //   id: doc.id,
+      //   ...doc.data()
+      // }));
       const userDestinations = user_destinationsSnapshot.docs.filter(ud => ud.get("userID") == userID);
       const destinationIDs: string[] = [];
       userDestinations.forEach(doc => {
-        destinationIDs.push(doc.data().destinationID);
+        destinationIDs.push(doc.get("destinationID"));
+        console.log(doc.get("destinationID")); // dette er for å teste
       });
       return destinationIDs;
-    } catch (error) {
-      console.error('Error getting destinationIDs:', error);
-      throw error;
-    }
   }
 
   // Method to retrieve the list of destinations from the collection destinations that have the IDs from destinationIDs
@@ -80,7 +81,21 @@ export const auth = getAuth(app)
     return filteredDestinations;
   }
 
-  
+  async getReviewForDestinationUser(userID: string, reviews: DocumentData[]) {
+    const filteredReviews = reviews.filter(review => review.userID == userID)
+    // if (filteredReviews.length == 1) {
+    //   const rating = filteredReviews[0].get("rating");
+    //   const comment = filteredReviews[0].get("comment");
+
+    //   return [rating, comment];
+      
+    // }
+    // else {
+    //   return null;
+    // }
+
+    return filteredReviews;
+  }
 
   async getReviewsForDestination(destinationID: string) {
     const reviewsCol = collection(db, "destinations", destinationID, "reviews");

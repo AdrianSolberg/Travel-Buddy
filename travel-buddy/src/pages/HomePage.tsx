@@ -31,6 +31,13 @@ const HomePage = () => {
     const userEmail = localStorage.getItem("user")?.replace(/"/g, "");
 
     useEffect(() => {
+        // const destinationsIDs = ["0VyIW93Rj3B9KoT3OOxw", "25gAXjx3Pr8ehpBuwwv4"];
+        // const firebasecontroller = new firebaseControl();
+        // firebasecontroller.getVisitedDestinationsForUser(destinationsIDs).then((destinationsFirebase) => {
+        //     setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase)));
+        //     setDestinationsChanged(false);
+        // });
+        // const userdestinationID = 
         
 /* 
         // let destinations: DocumentData[] = [];
@@ -59,12 +66,28 @@ const HomePage = () => {
     }, [destinationsChanged, isLoggedIn, userEmail])
 
     useEffect(() => {
-        const firebasecontroller = new firebaseControl();
-        firebasecontroller.getDestinastions().then((destinationsFirebase) => {
-            setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase)));
+        const fetchData = async () => {
+            const firebasecontroller = new firebaseControl();
+            const destinationsIDs = await firebasecontroller.getVisitedDestinationsForUserID("qw6gf64ky9dIw3xY0SuD9aeLQZ22");
+            
+            // Assuming getVisitedDestinationsForUser is also async and requires the IDs obtained above
+            const destinationsFirebase = await firebasecontroller.getVisitedDestinationsForUser(destinationsIDs);
+            
+            setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase))); // Assuming destinationsFirebase is already string[]
             setDestinationsChanged(false);
-        });
-    }, [destinationsChanged])
+        };
+    
+        fetchData().catch(console.error); // Handle errors, e.g., from network issues or JSON parsing
+    }, [destinationsChanged]);
+    
+
+    // useEffect(() => {
+    //     const firebasecontroller = new firebaseControl();
+    //     // firebasecontroller.getDestinastions().then((destinationsFirebase) => {
+    //     //     setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase)));
+    //     //     setDestinationsChanged(false);
+    //     // });
+    // }, [destinationsChanged])
 
     async function signOut() {
         setUser(undefined);
@@ -83,7 +106,7 @@ const HomePage = () => {
      * @param val Value to check
      * @returns true if val is null, false otherwise
      */
-    function isEmpty(val: string | any[] | null | undefined){
+    function isEmpty(val: string | any[] | null | undefined) {
         return (val === undefined || val == null || val.length <= 0) ? true : false;
     }
     /**
