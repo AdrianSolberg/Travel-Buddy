@@ -6,8 +6,8 @@ import {
   addDoc,
   doc
 } from "firebase/firestore"
-import filterDestinationsByType from "../components/FilterDestinations";
-import filteredDestinationsSearch from "../components/FilterDestinations";
+// import filterDestinationsByType from "../components/FilterDestinations";
+// import filteredDestinationsSearch from "../components/FilterDestinations";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -49,6 +49,39 @@ export const auth = getAuth(app)
     return destinationsList;
   }
 
+  // Method to retrieve the destinationIDs that matches userID from the user_destinations collection
+  async getVisitedDestinationsForUserID(userID: string): Promise<string[]> {
+    try {
+      const user_destinationsCol = collection(db, "user_destinations");
+      const user_destinationsSnapshot = await getDocs(user_destinationsCol);
+      const userDestinations = user_destinationsSnapshot.docs.filter(ud => ud.get("userID") == userID);
+      const destinationIDs: string[] = [];
+      userDestinations.forEach(doc => {
+        destinationIDs.push(doc.data().destinationID);
+      });
+      return destinationIDs;
+    } catch (error) {
+      console.error('Error getting destinationIDs:', error);
+      throw error;
+    }
+  }
+
+  // Method to retrieve the list of destinations from the collection destinations that have the IDs from destinationIDs
+  async getVisitedDestinationsForUser(destinationIDs: string[]) {
+    const filteredDestinations = destinationIDs.map(async (destinationID) => {
+      const destinationsCol = collection(db, "destinations", destinationID);
+      const destinationsSnapshot = await getDocs(destinationsCol);
+      const destinationsList = destinationsSnapshot.docs.map(doc =>  ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      return destinationsList;
+    })
+    return filteredDestinations;
+  }
+
+  
+
   async getReviewsForDestination(destinationID: string) {
     const reviewsCol = collection(db, "destinations", destinationID, "reviews");
     const reviewsSnapshot = await getDocs(reviewsCol);
@@ -59,9 +92,7 @@ export const auth = getAuth(app)
     return reviewList;
   }
 
-  async getVisitedDestinationsForUser(userID: string) {
-    const userCol = collection(db, "user_destinations", userID)
-  }
+  
 
   async addDestination(addCity: string, addCountry: string, addImgURL?: string, addCategory?: string[], addDescription?: string) {
     const docRef = collection(db, "destinations");
