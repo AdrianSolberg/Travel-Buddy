@@ -1,7 +1,10 @@
 #filterPanel-container {
     width: 100%;
     border-radius: 10px;
-    margin: 10px;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     padding: 10px;
     display: flex;
     flex-direction: column;

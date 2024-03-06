@@ -7,10 +7,11 @@ interface DestinationInterface {
     rating: string;
     imgURL: string;
     onReadMore?: () => void;
+    isLoggedIn: boolean;
 }
 
 // Note: The button must be alignes with the rating-stars when they are added
-const DestinationBox: React.FC<DestinationInterface> = ({country, city, rating, imgURL, onReadMore}) => {
+const DestinationBox: React.FC<DestinationInterface> = ({country, city, rating, imgURL, onReadMore, isLoggedIn}) => {
 
     return (
         <div className='box'>
@@ -24,7 +25,8 @@ const DestinationBox: React.FC<DestinationInterface> = ({country, city, rating, 
                     <p>{rating}</p>
                 </div>
                 <div className="button-container">
-                    <button onClick={onReadMore}>Read More</button>
+                    <button onClick={isLoggedIn ? onReadMore : () => alert('Please log in to read more')}>
+                    Read More</button>
                 </div>
             </div>
         </div>
