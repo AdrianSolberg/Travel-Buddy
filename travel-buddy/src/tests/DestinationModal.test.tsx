@@ -5,7 +5,7 @@ import DestinationModal from '../components/DestinationModal';
 describe(DestinationModal, () => {
     it("renders without error when all props are valid", () => {
         const onCloseMock = jest.fn();
-        const { container } = render(<DestinationModal country='Country' city='City' rating='5' tags={['city', 'Europe']} description='A really nice city' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png' onClose={onCloseMock}/>);        
+        const { container } = render(<DestinationModal id="123" country='Country' city='City' rating='5' tags={['city', 'Europe']} description='A really nice city' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png' onClose={onCloseMock}/>);        
         
         expect(container.querySelector('#modal-container')).toBeInTheDocument();
 
@@ -41,7 +41,7 @@ describe(DestinationModal, () => {
 
     it("handles missing parameters", () => {
         const onCloseMock = jest.fn();
-        const { container } = render(<DestinationModal country='Country' city='City' rating='' tags={[]} description='' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png' onClose={onCloseMock}/>);        
+        const { container } = render(<DestinationModal id="123" country='Country' city='City' rating='' tags={[]} description='' imgURL='https://media.snl.no/media/132105/article_topimage_Oslo_SNL.png' onClose={onCloseMock}/>);        
 
         const rating = container.querySelector('#rating-container');
         expect(rating).toBeInTheDocument();
