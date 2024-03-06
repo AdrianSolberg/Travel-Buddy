@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../styles/DestinationModal.css';
 import firebaseControl from '../app/firebaseControl';
 import { DocumentData } from 'firebase/firestore';
+import { User } from 'firebase/auth';
+import HaveBeenCheckbox from './HaveBeenCheckbox';
+
 
 interface DestinationInterface {
     id: string;
@@ -12,10 +15,25 @@ interface DestinationInterface {
     description: string;
     imgURL: string;
     onClose?: () => void;
+    user: User;
+    destinationIDs: string;
+    onFilterChange: (selectedDestinations: string[]) => void;
 }
 
 // Note: The button must be alignes with the rating-stars when they are added
-const DestinationModal: React.FC<DestinationInterface> = ({id, country, city, rating, tags, description, imgURL, onClose}) => {
+const DestinationModal: React.FC<DestinationInterface> = ({
+    id, 
+    country, 
+    city, 
+    rating, 
+    tags, 
+    description, 
+    imgURL, 
+    onClose, 
+    user, 
+    destinationIDs, 
+    onFilterChange}) => {
+    
     const [reviewList, setReviewList] = useState<DocumentData[]>([]);
 
     useEffect(() => {
@@ -25,6 +43,17 @@ const DestinationModal: React.FC<DestinationInterface> = ({id, country, city, ra
         });
     }, []);
 
+    const handleUserDestinations = async () => {
+        try {
+            const firebasecontroller = new firebaseControl();
+            await firebasecontroller.setUser(user.uid, id);
+            console.log("Destination added to user's list:", id);
+        } catch (error) {
+            console.error("Error adding destination to user's list:", error);
+        }
+    };
+
+
     return (
         <div id='modal-container' className='not-blur'>
             <button id='x-button' onClick={onClose} className='not-blur'>X</button>
@@ -32,6 +61,10 @@ const DestinationModal: React.FC<DestinationInterface> = ({id, country, city, ra
             <div id='info-container' className='not-blur'>
                 <div id='title-container' className='not-blur'>
                     <h1 className='not-blur'>{city}, {country}</h1>
+
+                    <button onClick={handleUserDestinations} className='not-blur' style={{ marginLeft: '10px'}}>I've been here</button>
+                    {/* <HaveBeenCheckbox id={id} onFilterChange={onFilterChange} /> */}
+
                 </div>
                 <div id="rating-container" className='addPadding not-blur'>
                     {rating ? 'Rating: ' + rating : 'This destination does not have a rating yet'}

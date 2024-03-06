@@ -114,6 +114,21 @@ export const auth = getAuth(app)
     return auth;
   }
 
+  async setUser(userID: string, destinationID: string) {
+    const collectionRef = collection(db, "user_destinations");
+    try {
+      const newDocRef = await addDoc(collectionRef, {
+        destinationID: destinationID,
+        userID: userID
+      });
+    }
+
+    catch (e) {
+      console.error("Error creating user document:", e);
+    }
+  }
+
+
 };
 
 export default firebaseControl;
