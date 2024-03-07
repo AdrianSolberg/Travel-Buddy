@@ -31,6 +31,10 @@ img {
 
 .more-div {
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
 }
 
 h1 {
@@ -49,8 +53,6 @@ h2 {
 }
 
 .rating-container {
-    width: 100%;
-    height: 50%;
     display: flex;
     justify-content: right;
     align-items: center;
@@ -61,11 +63,10 @@ p {
 }
 
 .button-container {
-    width: 100%;
-    height: 50%;
     display: flex;
     justify-content: right;
     align-items: center;
+    margin-right: 16px;
 }
 
 button {
@@ -75,7 +76,6 @@ button {
     border-radius: 5px;
     color: white;
     font-weight: bold;
-    margin-right: 30px;
 }
 
 button:hover {
@@ -85,4 +85,13 @@ button:hover {
 button:active {
     background-color: rgb(100, 100, 100);
     transform: scale(0.97);
+}
+
+.weather-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 32px;
+    height: 32px;
+    margin-right: 16px;
 }
