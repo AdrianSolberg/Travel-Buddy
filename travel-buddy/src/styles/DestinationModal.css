@@ -6,10 +6,12 @@
     box-shadow: 0 0 10px 5px #3A3A3A;
     position: absolute;
     z-index: 2;
+    margin: 20px;
+    padding-bottom: 20px;
 }
 
 .not_blur {
-    
+    filter: none;   
 }
 
 #x-button {
@@ -52,13 +54,20 @@ button:active {
     border-width: 1px;
 }
 
-#title-container h1 {
+#title-container h1, h3 {
     color: #3A3A3A;
 }
 
 .addPadding {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#visited-container {
+    margin-top: 5px;
+    height: 5ch;
+    display: flex;
+    align-items: center;
 }
 
 #rating-container {
@@ -82,5 +91,79 @@ button:active {
     display: flex;
     align-items: center;
     margin-top: 5px;
+}
+
+#admin-buttons {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#edit-button {
+    background-color: transparent;
+    font-size: 16px;
+    color: rgb(55, 102, 222);
+    margin-left: 5px;
+}
+
+#delete-button {
+    background-color: transparent;
+    font-size: 16px;
+    color: rgb(224, 70, 70);
+    margin-right: 5px;
+}
+
+#delete-button:hover {
+    transform: scale(1.05);
+}
+
+#edit-button:hover {
+    transform: scale(1.05);
+}
+
+#icon {
+    margin-left: 5px;
+}
+
+
+#myrating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: relative; 
+    position: relative;
+}
+
+#review-destinations {
+    width: 300px; 
+    height: 100px; 
+    filter: none;
+    resize: none;
+}
+
+#starRating {
+    filter: none !important;
+    
+}
+
+#submit-review {
+    padding: 5px; 
+    margin: 5px;
+    box-sizing: border-box; 
+}
+
+.singlereview-container {
+    border-top-color: #3A3A3A;
+    opacity: 0.5;
+    justify-content: space-between;
+}
+
+#checkbox-container {
+    background-color: #FAFCFE;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
 }
 

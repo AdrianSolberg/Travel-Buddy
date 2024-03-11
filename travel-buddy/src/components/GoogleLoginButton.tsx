@@ -37,12 +37,15 @@ const GoogleLoginButton: React.FC = () => {
     try {
       const result = await signInWithPopup(firebaseControl.getAuth(), provider);
       const user = result.user;
-      setIsLoggedIn(true);
-      localStorage.setItem('user', JSON.stringify(user.email));
+      if (user) {
+        const userID = user.uid;
+        setIsLoggedIn(true);
+        localStorage.setItem('user', JSON.stringify(user.email));
+      }
     } catch (error) {
       console.error(error);
     }
-};
+  };
 
 
   const handleGoogleLogout = async () => {
@@ -58,13 +61,10 @@ const GoogleLoginButton: React.FC = () => {
   return (
     <div>
       {isLoggedIn ? (
-        // Render "Sign out" button if user is logged in
         <button onClick={handleGoogleLogout}>Sign out</button>
       ) : (
-        // Render "Sign in with Google" button if user is not logged in
-        <button onClick={handleGoogleLogin}>Sign in with Google</button>
-        
-        
+        <button onClick={handleGoogleLogin}>Sign in with Google</button> 
+  
       )}
     </div>
   );

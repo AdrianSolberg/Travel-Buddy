@@ -3,13 +3,16 @@ import React from 'react';
 import { useState } from 'react';
 import firebaseControl from "../app/firebaseControl";
 import '../styles/AddDestination.css'
+import { DocumentData } from 'firebase/firestore';
 
 
 interface AddDestinationInterface {
-    onClose?: () => void;
+    onClose: () => void;
+    checkDuplicates: (country: string, city: string, destinations: DocumentData[]) => boolean;
+    destinationList: DocumentData[];
 }
 
-const AddDestination: React.FC<AddDestinationInterface> = ({onClose}) => {
+const AddDestination: React.FC<AddDestinationInterface> = ({onClose, checkDuplicates, destinationList}) => {
 
     const firebaseController = new firebaseControl;
     const [continent, setContinent] = useState('');
@@ -25,10 +28,14 @@ const AddDestination: React.FC<AddDestinationInterface> = ({onClose}) => {
         "Activities": ["Hiking", "Skiing", "Sightseeing"], 
         "Destination type": ["City", "Beach", "Culture", "Safari", "Historical", "Active"]
     }
+    
 
     const handleSubmit = async () => {
         const categoriesList: string[] = [];
-        if (city !== '' && country !== '' && imgUrl !== '' && climate !== '' && continent!==''){
+        if (checkDuplicates(country, city, destinationList)) {
+            setStatus('This destination already exists')
+        }
+        else if (city !== '' && country !== '' && imgUrl !== '' && climate !== '' && continent!==''){
             categoriesList.push(continent);
             categoriesList.push(climate);
             categories.map(cat => categoriesList.push(cat));
