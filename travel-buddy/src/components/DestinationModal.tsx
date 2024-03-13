@@ -5,6 +5,7 @@ import { DocumentData } from 'firebase/firestore';
 import { User } from 'firebase/auth';
 import { Rating } from '@mui/material';
 import HaveBeenCheckbox from './HaveBeenCheckbox';
+import HaveBeenPin from './HaveBeenPin';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +25,8 @@ interface DestinationInterface {
     onEdit?: () => void;
     onDelete?: () => void;
     visited?: any;
+    onVisitToggle: (destinationId: string) => void;
+    visitedDestinations: string[];
 }
 
 
@@ -42,7 +45,9 @@ const DestinationModal: React.FC<DestinationInterface> = ({
     user,
     visited, 
     onEdit, 
-    onDelete}) => {
+    onDelete,
+    onVisitToggle, 
+    visitedDestinations}) => {
     
     const [reviewList, setReviewList] = useState<DocumentData[]>([]);
     const [activeStar, setActiveStar] = useState<number>(2.5);
@@ -86,6 +91,7 @@ const DestinationModal: React.FC<DestinationInterface> = ({
         } 
     }
 
+
     return (
         <div id='modal-container' className='not-blur'>
             <button id='x-button' onClick={onClose} className='not-blur'>X</button>
@@ -109,7 +115,7 @@ const DestinationModal: React.FC<DestinationInterface> = ({
                     <h1 className='not-blur'>{city}, {country}</h1>
                 </div>
                 <div id="visited-container" className='addPadding not-blur'>
-                    <HaveBeenCheckbox id={id} user={user}/>
+                    <HaveBeenPin id={id} user={user}/>
                 </div>
                 <div id="rating-container" className='addPadding not-blur'>
                     {rating ? 'Rating: ' + rating : 'This destination does not have a rating yet'}

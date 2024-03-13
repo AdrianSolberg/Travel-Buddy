@@ -30,7 +30,9 @@ const HomePage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isAdmin, setAdmin] = useState<boolean>(false);
     const [userEmail, setUserEmail] = useState<string | undefined>('');
-
+    const [visitedDestinations, setVisitedDestinations] = useState<string[]>([]);
+    
+    
     useEffect(() => {
         setUserEmail(localStorage.getItem("user")?.replace(/"/g, ""));
     }, [])
@@ -67,7 +69,7 @@ const HomePage = () => {
     useEffect(() => {
         const firebasecontroller = new firebaseControl();
         firebasecontroller.getDestinastions().then((destinationsFirebase) => {
-            //setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase)));
+        //setDestinationList(JSON.parse(JSON.stringify(destinationsFirebase)));
             const destList:DocumentData[] = JSON.parse(JSON.stringify(destinationsFirebase));
             destList.map(dest => ({
                 visited: firebasecontroller.checkIfVisited(user?.uid, dest.id),
@@ -149,6 +151,15 @@ const HomePage = () => {
 
         return (destinationsOfCity.length > 0 && destinationsOfCountry.length > 0) ? true: false
     }
+
+    const handleVisitToggle = (destinationId: string) => {
+        if (visitedDestinations.includes(destinationId)) {
+            setVisitedDestinations(visitedDestinations.filter(id => id !== destinationId));
+        } else {
+            setVisitedDestinations([...visitedDestinations, destinationId]);
+        }
+    };
+
     
 
     const cities = () => {
@@ -168,6 +179,11 @@ const HomePage = () => {
                         imgURL={destin.imgUrl}
                         onReadMore={() => readMore(i)}
                         isLoggedIn={!!user}
+                        user={user}
+                        id={filteredDestinationsSearch(filterDestinationsByType(destinationList, tags), searchQuery)[destIndex].id} //bare id?
+                        onVisitToggle={handleVisitToggle}
+                        visitedDestinations={visitedDestinations}
+                           
                     />
                     
                 ))
@@ -182,8 +198,6 @@ const HomePage = () => {
 
     
       
-      
-
     const closeModal = () => {
         setDestIndex(0);
         setOpenModal(false);
@@ -255,6 +269,8 @@ const HomePage = () => {
                     imgURL={filteredDestinationsSearch(filterDestinationsByType(destinationList, tags), searchQuery)[destIndex].imgUrl}
                     user={user}
                     admin={isAdmin}
+                    onVisitToggle={handleVisitToggle}
+                    visitedDestinations={visitedDestinations}
                     onEdit={() => editDestination()}
                     onDelete={() => deleteDestination(filteredDestinationsSearch(filterDestinationsByType(destinationList, tags), searchQuery)[destIndex].id)}
                     onClose={() => closeModal()}/>}

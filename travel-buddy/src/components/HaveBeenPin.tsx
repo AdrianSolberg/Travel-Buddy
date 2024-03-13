@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import firebaseControl from '@/app/firebaseControl';
 import { User } from 'firebase/auth';
 
@@ -7,52 +9,47 @@ interface HaveBeenProps {
     id: string;
 }
 
-const HaveBeenCheckbox: React.FC<HaveBeenProps> = ({ user, id }) => {
-    const [isChecked, setIsChecked] = useState(false);
+const HaveBeenPin: React.FC<HaveBeenProps> = ({ user, id }) => {
+    const [isVisited, setIsVisited] = useState(false);
 
     useEffect(() => {
         const checkVisited = async () => {
             try {
                 const firebasecontroller = new firebaseControl();
                 const visited = await firebasecontroller.checkIfVisited(user?.uid, id);
-                setIsChecked(visited);
+                setIsVisited(visited);
+                
             } catch (error) {
                 console.error("Error checking if visited:", error);
             }
         };
-            checkVisited();
+        checkVisited();
     }, []);
 
-    const handleCheckboxChange = async () => {
+    const handleIconClick = async () => {
         try {
             const firebasecontroller = new firebaseControl();
-            if (!isChecked) {
+            if (!isVisited) {
                 await firebasecontroller.setUser(user?.uid, id);
                 console.log("Destination added to user's list:", id);
             } else {
                 await firebasecontroller.removeUserDestination(user?.uid, id);
                 console.log("Destination removed from user's list:", id);
             }
-            setIsChecked(!isChecked); 
+            setIsVisited(!isVisited); 
         } catch (error) {
-            console.error("Error handling checkbox change:", error);
+            console.error("Error handling icon click:", error);
         }
     };
 
     return (
         <div>
-        <div style={{display: "flex", flexDirection: 'row'}}>
-            <label>Visited:</label>
-            <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
-            />
-        </div>      
-        </div>  
-       
-
+            <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center' }} onClick={handleIconClick}>
+                <FontAwesomeIcon icon={faMapPin} style={{ color: isVisited ? '#00FF00' : 'gray', cursor: 'pointer', fontSize: '24px' }} />
+                <span style={{ marginLeft: '0.5rem' }}>Visited</span>
+            </div>
+        </div>
     );
 };
 
-export default HaveBeenCheckbox;
+export default HaveBeenPin;
