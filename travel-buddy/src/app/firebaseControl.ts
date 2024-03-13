@@ -197,7 +197,40 @@ export const auth = getAuth(app)
     return pairList;
   } */
 
+    async getUserVisitedDestinationsWithReview(userID: string) {
+        const userDestinationsSnapshot = await getDocs(
+            query(
+                collection(db, "user_destinations"),
+                where("userID", "==", userID),
+            )
+        )
+    
+        const userVisitedDestinationsWithReview = [];
+
+        for (const document of userDestinationsSnapshot.docs) {
+            const destinationId = document.data().destinationID;
+    
+            const destinationDoc = await getDoc(doc(db, 'destinations', destinationId));
+            const destination = {
+                review: {},
+                ...destinationDoc.data()
+            };
+        
+            const reviewSnapshot = await getDocs(
+                query(
+                    collection(db, 'destinations', destinationId, 'reviews'),
+                    where('userID', '==', userID)
+                )
+            )
+    
+            if (!reviewSnapshot.empty) {
+                destination.review = reviewSnapshot.docs[0].data();
+            }
+    
+            userVisitedDestinationsWithReview.push(destination);
+        }
+        return userVisitedDestinationsWithReview;
+    }
 };
 
 export default firebaseControl;
-
