@@ -17,7 +17,7 @@ interface DestinationInterface {
     isLoggedIn: boolean;
     id: string 
     user: User | undefined;
-    onVisitToggle: (destinationId: string) => void;
+    onVisitToggle: (id: string) => void;
     visitedDestinations: string[];
 
 }

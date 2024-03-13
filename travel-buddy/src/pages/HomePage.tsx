@@ -152,11 +152,11 @@ const HomePage = () => {
         return (destinationsOfCity.length > 0 && destinationsOfCountry.length > 0) ? true: false
     }
 
-    const handleVisitToggle = (destinationId: string) => {
-        if (visitedDestinations.includes(destinationId)) {
-            setVisitedDestinations(visitedDestinations.filter(id => id !== destinationId));
+    const handleVisitToggle = (id: string) => {
+        if (visitedDestinations.includes(id)) {
+            setVisitedDestinations(visitedDestinations.filter(id => id !== id));
         } else {
-            setVisitedDestinations([...visitedDestinations, destinationId]);
+            setVisitedDestinations([...visitedDestinations, id]);
         }
     };
 

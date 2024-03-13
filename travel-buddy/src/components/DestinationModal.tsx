@@ -25,7 +25,7 @@ interface DestinationInterface {
     onEdit?: () => void;
     onDelete?: () => void;
     visited?: any;
-    onVisitToggle: (destinationId: string) => void;
+    onVisitToggle: (id: string) => void;
     visitedDestinations: string[];
 }
 
