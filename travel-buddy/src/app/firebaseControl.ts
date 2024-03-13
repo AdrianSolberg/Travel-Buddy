@@ -114,6 +114,28 @@ export const auth = getAuth(app)
       }
   }
 
+  async updateReview(destinationID: string, reviewID: string, rating: number, comment: string) {
+    const docRef = doc(db, "destinations", destinationID, "reviews", reviewID);
+    try {
+        await updateDoc(docRef, {
+            rating: rating,
+            comment: comment
+        });
+      }
+    catch (e) {
+        console.error(e)
+    }
+  }
+
+  async deleteReview(destinationID: string, reviewID: string) {
+    try {
+        await deleteDoc(doc(db, "destinations", destinationID, "reviews", reviewID));
+      }
+    catch (e) {
+        console.error(e);
+    }
+  }
+
   getAuthInstance() {
     return auth;
   }
