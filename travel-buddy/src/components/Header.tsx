@@ -14,8 +14,8 @@ export const Header: React.FC = () => {
             </Link>
 
             <div className="navbar-end" style={{ display: 'flex' }}>
-                <Link href="/MyProfile" className='link'>
-                    <div className='navbar-start' style={{ fontFamily: 'Arial', fontSize: '18px', paddingRight: '20px', justifyContent: 'space-between'}}>My Profile</div>
+                <Link href="/MyDestinations" className='link'>
+                    <div className='navbar-start' style={{ fontFamily: 'Arial', fontSize: '18px', paddingRight: '20px', justifyContent: 'space-between'}}>My Destinations</div>
                 </Link>
 
                 <GoogleLoginButton/>
