@@ -23,7 +23,7 @@ const inter = Inter({ subsets: ["latin"] });
       <body className={inter.className}>
         <Header />
         <div className="content">{children}</div>
-        </body>
+      </body>
     </html>
   );
   }

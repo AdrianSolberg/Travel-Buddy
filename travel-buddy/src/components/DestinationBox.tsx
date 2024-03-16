@@ -18,7 +18,7 @@ interface DestinationInterface {
 const DestinationBox: React.FC<DestinationInterface> = ({country, city, rating, imgURL, onReadMore, isLoggedIn}) => {
 
     return (
-        <div className='box'>
+        <div className='box' id='box'>
             <img src={imgURL} alt="Error loading image" className='inner-div' />
             <div className='inner-div info-div'>
                 <h1>{city}</h1>

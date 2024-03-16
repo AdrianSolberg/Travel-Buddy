@@ -17,10 +17,11 @@
     margin: 0px;
     margin-top: 10px;
     margin-bottom: 10px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
 }
 
 #menu-container h4 {
-    background-color: #9aa0a5;
+    background-color: #96c9eb;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 10px;
@@ -32,7 +33,6 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 10px;
-
 }
 
 #checkbox-container label {

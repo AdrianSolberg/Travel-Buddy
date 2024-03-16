@@ -70,6 +70,13 @@ button:active {
     align-items: center;
 }
 
+#weather-display-container {
+    margin-top: 5px;
+    height: 5ch;
+    display: flex;
+    align-items: center;
+}
+
 #rating-container {
     margin-top: 5px;
     height: 5ch;
@@ -127,7 +134,6 @@ button:active {
     margin-left: 5px;
 }
 
-
 #myrating-container {
     display: flex;
     flex-direction: column;
@@ -154,9 +160,16 @@ button:active {
     box-sizing: border-box; 
 }
 
-.singlereview-container {
-    border-top-color: #3A3A3A;
+#singlereview-container{
     opacity: 0.5;
+    justify-content: space-between;
+}
+
+
+#top-of-review {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -167,3 +180,30 @@ button:active {
     padding: 10px;
 }
 
+#triple-button-div {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#back-review {
+    font-size: 30px;
+    color: rgb(55, 102, 222);
+    margin: 5px;
+}
+
+#update-review {
+    font-size: 30px;
+    color: rgb(0, 193, 0);
+    margin: 5px;
+}
+
+#delete-review {
+    font-size: 30px;
+    color: rgb(224, 70, 70);
+    margin: 5px;
+}
+
+#back-review:hover, #update-review:hover, #delete-review:hover{
+    transform: scale(1.05);
+}

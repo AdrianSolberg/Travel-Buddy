@@ -5,15 +5,14 @@
     overflow: hidden;
     margin: 10px;
     background-color: #FAFCFE;
-   /*  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); */
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
 
 }
 
-/* .box:hover {
-    transform: scale(1.02);
-    background-color: #FAFCFE;
-    
-} */
+.box:hover {
+    transform: scale(1.01);
+}
+
 
 .inner-div {
     float: left;
@@ -81,6 +80,7 @@ button {
     border-radius: 5px;
     color: white;
     font-weight: bold;
+    padding: 5px;
 }
 
 button:hover {
@@ -98,4 +98,5 @@ button:active {
     height: 32px;
     height: 32px;
     margin-right: 16px;
+    font-size: 26px;
 }
