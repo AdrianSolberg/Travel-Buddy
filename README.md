@@ -12,13 +12,15 @@ Travel Buddy is a travel website, made as a part of the subject "TDT4140 - Softw
 
 ## How to run the project
 
-First you need to install the required dependencies:
+First you need to make your way into the inner `travel-buddy` folder (notice that there are two `travel-buddy` folders).
+
+Install the required dependencies:
 
 ```bash
 npm install
 ```
 
-Then you need to run the development server:
+Then run the development server:
 
 ```bash
 npm run dev
