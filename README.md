@@ -44,4 +44,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ![Reviews](https://i.imgur.com/Atc7oBG.png)
 
+![Edit Destination](https://i.imgur.com/wSv6bDJ.png)
+
 ![Your visited destinations](https://i.imgur.com/tbSYQtu.png)
