@@ -1,0 +1,9 @@
+.weatherIconContainer {
+    height: 32px;
+    display: inline-block;
+}
+
+.temperatureContainer {
+    padding-right: 5px;
+    display: inline-block;
+}

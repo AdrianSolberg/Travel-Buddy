@@ -1,0 +1,45 @@
+.container {
+    background-color: rgb(18, 171, 222);
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .LoginButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 50px;
+  }
+
+  .RightButton:hover{
+    background-color: darkgreen;
+  }
+
+
+  input {
+    width: 50%;
+    padding: 12px 10px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    margin-left: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .openLogin{
+    align-items: right;
+  }

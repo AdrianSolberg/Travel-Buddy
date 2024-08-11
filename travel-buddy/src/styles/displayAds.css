@@ -1,0 +1,40 @@
+#adColumn{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    width: 100%;
+}
+
+#adColumn img {
+    height: inherit;
+    width: inherit;
+    min-width: 96%;
+    max-width: 96%;;
+}
+
+#adColumn > #delete {
+    height: inherit;
+    width: inherit;
+}
+
+#delete button {
+    background-color: transparent;
+    width: 20px;
+    height: 40px;
+    color: #868585;
+    position: absolute;
+    z-index: 4;
+}
+
+#delete button:hover {
+    transform: scale(1.08);
+    color: rgb(195, 86, 86);
+}
+
+#delete {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+

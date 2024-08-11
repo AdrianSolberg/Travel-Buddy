@@ -1,0 +1,191 @@
+.box {
+    height: 200px;
+    width: 750px;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    background-color: #FAFCFE;
+   /*  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); */
+
+}
+
+.outer.box{
+    height: 200px;
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #FAFCFE;
+}
+
+/* .box:hover {
+    transform: scale(1.02);
+    background-color: #FAFCFE;
+    
+} */
+
+.inner-div {
+    height: 200px;
+    float: left;
+    height: 100%;
+}
+
+img {
+    width: 40%;
+    border-radius: 10px;
+}
+
+.info-div {
+    width: 30%;
+}
+
+.more-div {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+h1 {
+    color: #3A3A3A;
+    padding-left: 10px;
+    font-size: 40px;
+    height: 40%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h2 {
+    color: #3A3A3A;
+    opacity: 0.72;
+    padding-left: 10px;
+    font-size: 30px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h3 {
+    color: #060606;
+    
+    font-size: 30px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
+.rating-container > p {
+    border-color: black;
+}
+
+p {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.button-container {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-right: 16px;
+}
+
+button {
+    background-color: #565656;
+    border: 0px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: grey;
+}
+
+button:active {
+    background-color: rgb(100, 100, 100);
+    transform: scale(0.97);
+}
+.weather-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 32px;
+    height: 32px;
+    margin-right: 16px;
+    font-size: 26px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.review-container {
+    width: 730px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #a1bcd9;
+    margin-bottom: 30px;
+    opacity: 1;
+    padding: 10px;
+}
+
+.header-padding{
+    padding-top: 50px;
+}
+
+.headline{
+    color: #3A3A3A;
+    padding-bottom: 10px;
+    font-size: 60px;
+    align-items: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.filter-container {
+    position: absolute;
+    left: 0; /* Preserve left alignment */
+    width: 22%;
+    /* display: flex; */
+    z-index: 1;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 750px;
+}
+
+#edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: relative; 
+    position: relative;
+}
+
+#top-half-review {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#header-div {
+    display: flex;
+    justify-content: center;
+}
+
+#search-div {
+    width: 100%;
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+    left: auto;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#search-div input { 
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
